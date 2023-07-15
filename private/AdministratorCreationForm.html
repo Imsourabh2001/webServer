@@ -1,0 +1,70 @@
+<!DOCTYPE HTML>
+<html lang='en'>
+<head>
+<meta charset='utf-8'>
+<title>College Message Board</title>
+<script>
+function validateForm(f)
+{
+var username=f.username.value.trim();
+var password=f.password.value.trim();
+var repassword=f.repassword.value.trim();
+if(username.length==0)
+{
+alert('Username Required');
+f.username.focus();
+return false;
+}
+if(password.length==0)
+{
+alert('Password Required')
+f.password.focus();
+return false;
+} 
+if(repassword.length==0)
+{
+alert('Password Confirmation Required')
+f.password.focus();
+return false;
+} 
+if(password!=repassword)
+{
+alert("Password not confirmed correctly");
+f.password.value="";
+f.repassword.value="";
+f.password.focus();
+return false;
+}
+return true;
+}
+</script>
+</head>
+<body>
+<h1>Administration Module</h1>
+<h3>Create Administrator</h3>
+<form action='/admin/create' method='POST' onsubmit='return validateForm(this)'>
+<table border='0'>
+<tr>
+<td>Username</td>
+<td><input type='text' id='username' name='username' maxlength='16' size='17'></td>
+</tr>
+<tr>
+<td>
+Password
+</td>
+<td><input type='password' id='password' name='password' maxlength='16' size='17'>
+</td>
+</tr>
+<tr>
+<td>
+RePassword
+</td>
+<td><input type='password' id='repassword' name='repassword' maxlength='16' size='17'>
+</td>
+</tr>
+<tr>
+<td colspan ='2' align='center'><button type='submit'>Create Administrator</button></td>
+</tr>
+</table>
+</form>
+</body>

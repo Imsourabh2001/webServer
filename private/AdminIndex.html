@@ -1,0 +1,67 @@
+<!DOCTYPE HTML>
+<html lang='en'>
+<head>
+<meta charset='utf-8'>
+<title>College Message Board</title>
+<script>
+function validateForm(f)
+{
+var username=f.username.value.trim();
+var password=f.password.value.trim();
+if(username.length==0)
+{
+alert('Username Required');
+f.username.focus();
+return false;
+}
+if(password.length==0)
+{
+alert('Password Required')
+f.password.focus();
+return false;
+} 
+return true;
+}
+function authenticate()
+{
+var loginFormId=document.getElementById('loginFormId');
+var isValid=validateForm(loginFormId);
+if(!isValid) return;
+var xmlHttpRequest=new XMLHttpRequest();
+var dataString="username="+encodeURI(loginFormId.username.value.trim());
+dataString=dataString+"&password="+encodeURI(loginFormId.password.value.trim());
+xmlHttpRequest.onreadystatechange=function(){
+if(this.readyState==4 && this.status==200)
+{
+alert('Response arrived '+this.responseText);
+}
+};
+xmlHttpRequest.open("POST","/admin/authenticate",true);
+xmlHttpRequest.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+xmlHttpRequest.send(dataString);
+}
+
+</script>
+</head>
+<body>
+<h1>Administration Module</h1>
+<h3>Authenticate Administrator</h3>
+<form id='loginFormId' action='/admin/authenticate' method='POST' onsubmit='return validateForm(this)'>
+<table border='0'>
+<tr>
+<td>Username</td>
+<td><input type='text' id='username' name='username' maxlength='16' size='17'></td>
+</tr>
+<tr>
+<td>
+Password
+</td>
+<td><input type='password' id='password' name='password' maxlength='16' size='17'>
+</td>
+</tr>
+<tr>
+<td colspan ='2' align='center'><button type='button' onclick='authenticate()'>Login</button></td>
+</tr>
+</table>
+</form>
+</body>

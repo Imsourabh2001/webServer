@@ -1,0 +1,56 @@
+module.exports=class AdminManager
+{
+constuctor()
+{
+}
+
+
+index()
+{
+when this method gets called check if admin credential data file exists,
+if exists, return json as follows
+{
+"forward":"/private/AdminIndex.html";
+}
+if does not exists, return json as follows
+{
+"forward":"/private/AdministratorCreationForm.html";
+}
+}
+
+
+createAdministrator(administrator)
+{
+check if admin credentials data file exists,
+if exists return the following json
+{
+"forward":"private/AdminIndex.html"
+}
+if not exists, create the credential data file, 
+store data from administrator object and return following json
+{
+"forward":"private/AdminIndex.html"
+}
+}
+
+checkCredentials(administrator)
+{
+compare data against administrator object with data in credential data file 
+if matches return the following json
+{
+"success":true
+}
+else return following json
+{
+"success":false
+}
+}
+
+logout()
+{
+return following json
+{
+"forward":"private/AdminIndex.html"
+}
+}
+}
